@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./index.css">
+        <title>Planilha de investimentos</title>
+    </head>
+    <body>
+        <div id="container">
+            <section id="primeira-parte">
+                <form action="">
+                    <div class="primeira-divisao">
+                        <div class="investimento">
+                        <label class="investimento-label" for="investimento">Investimento: </label>
+                            <input type="text" class="investimento-input" name="investimento" placeholder="Somente código do investimento" required>
+                        </div>
+                        <div class="investimento">
+                            <label class="investimento-label" for="valor">Valor unitário: </label>
+                                <input type="number" class="investimento-input" name="valor" placeholder="Em reais" required>
+                        </div>
+                        <div class="investimento">
+                            <label class="investimento-label" for="quantidade">Quantidade: </label>
+                                <input type="number" class="investimento-input" name="quantidade" required>
+                        </div>
+                        <div class="investimento">
+                            <label class="investimento-label" for="data">Data de aquisição: </label>
+                                <input type="date"  class="investimento-input" name="data" min="2010-01-01" required>
+                        </div>
+                        <div class="investimento">
+                            <label class="investimento-label" for="valor">Vencimento: </label>
+                            <div class="vencimento-input">   
+                                <label for="short"><input type="radio"  value="short" name="periodo">0 - 2 anos</label>
+                            </div> 
+                            <div class="vencimento-input">   
+                                <label for="average"><input type="radio"  value="average" name="periodo">2 - 5 anos</label>
+                            </div>
+                            <div class="vencimento-input">   
+                                <label for="long"><input type="radio"  value="long" name="periodo">5+ anos</label>
+                            </div>
+                            <div class="vencimento-input">   
+                                <label for="indeterminado"><input type="radio"  value="indeterminado" name="periodo">Indeterminado</label>
+                            </div>
+                        </div>
+                        <div class="alerta-prioridade">
+                            <input type="checkbox" name="prioridade" checked>
+                            <label for="prioridade">Prioridade</label>
+                        </div>
+                        <button id="botao-inserir" type="submit">Inserir</button>
+                    </div> 
+                </form>     
+            </section>
+            <section id="segunda-parte">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Investimento</th>
+                            <th>Valor unitário</th>
+                            <th>Quantidade</th>
+                            <th>Data de aquisição</th>
+                            <th>Vencimento</th>
+                            <th>Remover</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>12</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td>Valor total: </td>
+                            <td>Total de itens: </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </section>
+        </div>  
+    </body>
+</html>

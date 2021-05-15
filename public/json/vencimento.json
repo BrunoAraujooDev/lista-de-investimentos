@@ -1,0 +1,24 @@
+{
+    "vencimentos": [
+        {
+            "id": "1",
+            "descricao": "0 - 2 anos",
+            "valor": "curto"
+        },
+        {
+            "id": "2",
+            "descricao": "2 - 5 anos",
+            "valor": "medio"
+        },
+        {
+            "id": "3",
+            "descricao": "5+ anos",
+            "valor": "longo"
+        },
+        {
+            "id": "4",
+            "descricao": "Indeterminado",
+            "valor": "indeterminado"
+        }
+    ]
+}

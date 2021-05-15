@@ -1,0 +1,48 @@
+{
+    "investimentos": [
+        {
+            "id": "1",
+            "codigo": "PETR4",
+            "idCategoria": "1",
+            "idValorInvestido": 2200.00,
+            "idQuantidade": 100,
+            "idDataAquisição": "10/04/2021",
+            "idVencimento": "4",
+            "idPrioridade": "ligado"
+
+        },
+        {
+            "id": "2",
+            "codigo": "Bitcoin",
+            "idCategoria": "3",
+            "idValorInvestido": 1000.00,
+            "idQuantidade": 100,
+            "idDataAquisição": "22/04/2021",
+            "idVencimento": "4",
+            "idPrioridade": "ligado"
+
+        },
+        {
+            "id": "3",
+            "codigo": "BCFF11",
+            "idCategoria": "2",
+            "idValorInvestido": 8500.00,
+            "idQuantidade": 100,
+            "idDataAquisição": "05/06/2020",
+            "idVencimento": "4",
+            "idPrioridade": "ligado"
+
+        },
+        {
+            "id": "4",
+            "codigo": "Tesouro Selic",
+            "idCategoria": "4",
+            "idValorInvestido": 5000.00,
+            "idQuantidade": 1,
+            "idDataAquisição": "01/02/2018",
+            "idVencimento": "2",
+            "idPrioridade": "ligado"
+
+        }
+    ]
+}

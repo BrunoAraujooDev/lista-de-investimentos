@@ -1,0 +1,20 @@
+{
+    "categorias": [
+        {
+            "id": "1",
+            "descricao": "Ações"
+        },
+        {
+            "id": "2",
+            "descricao": "Fundo Imobiliário"
+        },
+        {
+            "id": "3",
+            "descricao": "Criptomoeda"
+        },
+        {
+            "id": "4",
+            "descricao": "Renda fixa"
+        }      
+    ]
+}
