@@ -126,7 +126,7 @@
 }
 
 #tabela {
-    background-color: #4C5B84;
+    background-color: #2449af;
     border: 2px solid #000;
     border-collapse: collapse;
     border-radius: 7px;
@@ -142,11 +142,13 @@
 }
 
 .corpo-tabela {
-    background-color: #8798c7;
+    background-color: #fff;
     border: 1px solid #000;
     border-right: 1px solid #000;
     text-align: center;
 }
+
+/* #8798c7; */
 
 .corpo-tabela:nth-child(even) {
     background-color: #93abee;
@@ -165,5 +167,6 @@
     text-align: left;
     border-top: 2px solid #000;
     font-weight: bold;
+    background-color: #fff;
 }
 

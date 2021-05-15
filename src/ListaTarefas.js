@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import instanciaAxios from "./ajax/instanciaAxios";
 import './index.css'
+import { ReactSortable } from "react-sortablejs";
 
 const ListaTarefas = () => {
 
@@ -109,9 +110,22 @@ const ListaTarefas = () => {
 
     const CorpoTabela = () => {
 
+        // const CustomComponent = forwardRef((props, ref) => {
+        //     return <tbody ref={ref}>{props.children}</tbody>;
+        //   });
+
         if (listaInvestimentos.length > 0) {
             return (
-                <tbody>
+                 <tbody>
+                   {/* <ReactSortable list={listaInvestimentos} setList={setListaInvestimentos} 
+                      animation={200}
+                     delayOnTouchStart={true}
+                      delay={2}
+                      tag= {CustomComponent}> */}
+
+                    
+    
+           
                     {listaInvestimentos.map((item) => {
                         return (
                             <LinhaTabela
@@ -126,7 +140,8 @@ const ListaTarefas = () => {
                             />
                         );
                     })}
-                </tbody>
+                   {/* </ReactSortable> */}
+                  </tbody>
             );
         }else {
             return null;
@@ -157,6 +172,8 @@ const ListaTarefas = () => {
                     onClick={ () => removerItem(props.id)}/>
                 </td>
             </tr>
+         
+
         );
     };
 
@@ -168,7 +185,6 @@ const ListaTarefas = () => {
 
         if (novaCategoria && novoVencimento && codigoInvestimento && valorInvestimento && quantidadeInvestimento && pegarData) {
 
-            // const dataFormatada = ((pegarData.getDate() ) + "/" + (pegarData.getMonth() + 1 ) + "/" + pegarData.getFullYear());
 
             const novoInvestimento = {
                 "id": listaInvestimentos.length + 1,
@@ -188,7 +204,7 @@ const ListaTarefas = () => {
         }
     }
     
-    // Rmovendo itens da tabela
+    // Removendo itens da tabela
 
     const removerItem = (id) => {
         
@@ -198,7 +214,7 @@ const ListaTarefas = () => {
         setListaInvestimentos(_listaInvestimentos);
     }
 
-    // Variáveis para pegar valor investido
+    // Lógica para pegar valor investido
 
     const somaQuantidade = listaInvestimentos.reduce( (soma, item) => item.idValorInvestido + soma, 0);
 
@@ -220,8 +236,8 @@ const ListaTarefas = () => {
                         </div>                  
                         <div className="investimento">
                             <label htmlFor="categoria" className="investimento-label">Categorias: </label>
-                            <select name="categoria" className="investimento-input" onChange={ (event) => setNovaCategoria(event.target.value) }>
-                                <option value="" selected disabled value="">Selecione uma opção</option>
+                            <select name="categoria" value={novaCategoria || ""} className="investimento-input" onChange={ (event) => setNovaCategoria(event.target.value) }>
+                                <option disabled >Selecione uma opção</option>
                                 <OpcoesCategorias />
                             </select>
                         </div>
