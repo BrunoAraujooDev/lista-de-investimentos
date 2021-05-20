@@ -6,12 +6,11 @@
 #container {
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: #7C5E99;
+    background-color: #c0cde7;
     width: 100vw;
     height: 100vh;
+    font-family: 'Mukta', sans-serif;
 }
-
 
 #primeira-parte {
     display: flex;
@@ -19,8 +18,7 @@
     align-items: center;
     width: 50vw;
     height: 100vh;
-    /* border-right: 5px solid #000; */
-    font-family: "Roboto";
+    
 }
 
 
@@ -30,11 +28,30 @@
     flex-direction: column;
     width: 500px;
     height: 600px;
-    padding-top: 30px;
-    background-color: #4C5B84;
+    padding-bottom: 15px;
+    background-color: #FFF;
     border-radius: 7px;
-    border: 3px solid #000; 
+    border: 1px solid #000;
+    box-shadow: 0 5px 10px #000;
+    border-color: #2449af;
+    overflow: hidden;
 }
+
+.secao-titulo {
+    display: flex;
+    justify-content: center;
+    background-color: #2449af;
+    height: 50px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    color: #f2f3ff;
+}
+
+#titulo {
+    text-align: center;
+
+}
+
 
 .investimento {
     display: block;
@@ -53,6 +70,8 @@
     height: 25px;
     width: 380px;
     font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
 }
 
 .investimento-input {
@@ -61,10 +80,11 @@
     margin-right: auto;
     padding-left: 10px;
     padding-right: 10px;
-    border: 2px solid #000;
+    border: 1px solid #000;
     border-radius: 5px;
     height: 25px;
     width: 380px;
+    background-color: #f3f3f3;
 }
 
 
@@ -72,12 +92,13 @@
 .vencimento-input {
     display: flex;
     flex-direction: column;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     margin-left: auto;
     margin-right: auto;
     height: 25px;
     width: 380px;
     font-weight: bold; 
+
 }
 
 .vencimento-input label, .vencimento-input input {
@@ -105,23 +126,21 @@
 #botao-inserir {
     display: inline-block;
     position: relative;
-    width: 7em;
+    width: 8em;
     height: 2em;
-    left: 210px;
+    left: 150px;
     border-radius: 4px;
-    background-color: #B9B7BD;
-    
-
+    background-color: #cacaca;
 }
 
 
 #segunda-parte {
     display: flex;
     justify-content: left;
-    align-items: center;
+    bottom: 50px;
     width: 50vw;
     height: 100vh;
-    /* margin-top: 21rem; */
+    
 
 }
 
@@ -130,33 +149,42 @@
     border: 2px solid #000;
     border-collapse: collapse;
     border-radius: 7px;
+    color: #4f546c;
+    box-shadow: 0 5px 10px #000;
+    overflow: hidden;
+    margin-top: 170px;
+    white-space: nowrap;
 }
+
+
 
 
 #tabela th{
-    border-bottom: 2px solid #000;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: left;
+    
 }
 
 #tabela td, th {
-  padding: 10px;
+  padding: 12px 15px;
 }
 
 .corpo-tabela {
     background-color: #fff;
-    border: 1px solid #000;
-    border-right: 1px solid #000;
-    text-align: center;
+    text-align: left;
+    font-size: 1rem;
 }
 
-/* #8798c7; */
-
 .corpo-tabela:nth-child(even) {
-    background-color: #93abee;
+    background-color: #f3f3f3;
+    background-color: #d1eafa;
 }
 
 .remover {
     width: 20px;
-    margin-left: 12px;
+    margin-left: 20px;
 }
 
 .remover:hover{
@@ -168,5 +196,71 @@
     border-top: 2px solid #000;
     font-weight: bold;
     background-color: #fff;
+    font-size: 1rem;
 }
 
+
+@media screen and (max-width: 1024px) {
+
+    #container {
+        display: flex;
+        background-color: #c0cde7;
+        flex-direction: column;
+    }
+
+    #primeira-divisao {
+        width: 100vw;
+    }
+
+    #primeira-parte {
+        width: 100vw;
+    }
+ 
+
+    .primeira-divisao {
+        justify-content: center;
+        align-items: center;
+        width: 400px;
+        height: 600px;
+    }
+
+    .investimento-label {
+        margin-left: 50px;
+        margin-right: auto;
+    }
+
+    .investimento-input {
+        width: 300px;
+        margin-left: 50px;
+        margin-right: auto;
+
+    }
+
+    .vencimento-input {
+        margin-left: 50px;
+    }
+
+    .alerta-prioridade {
+        left: 28px;
+    }
+
+    #botao-inserir {
+        left: 60px;
+    }
+
+    #segunda-parte {
+        background-color: #c0cde7;
+        justify-content: center;
+        width: 100vw;
+    }
+
+    #tabela {
+        margin-top: 50px;
+        width: 300px;
+    }
+
+    #tabela td, th {
+        padding: 8px 12px;
+      }
+      
+}

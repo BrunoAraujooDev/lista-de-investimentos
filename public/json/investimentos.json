@@ -41,7 +41,7 @@
             "idQuantidade": 1,
             "idDataAquisição": "01/02/2018",
             "idVencimento": "2",
-            "idPrioridade": "ligado"
+            "idPrioridade": "desligado"
 
         }
     ]

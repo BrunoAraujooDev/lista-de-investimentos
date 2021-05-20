@@ -1,6 +1,6 @@
 import React, { useEffect, useState, forwardRef } from "react";
 import instanciaAxios from "./ajax/instanciaAxios";
-import './index.css'
+import './index.css';
 import { ReactSortable } from "react-sortablejs";
 
 const ListaTarefas = () => {
@@ -15,6 +15,7 @@ const ListaTarefas = () => {
     const [valorInvestimento, setValorInvestimento] = useState("");
     const [quantidadeInvestimento, setQuantidadeInvestimento] = useState("");
     const [novoVencimento, setNovoVencimento] = useState("");
+    const [novaPrioridade, setNovaPrioridade] = useState("desligado");
 
 
     // chamadas assíncronas
@@ -107,25 +108,13 @@ const ListaTarefas = () => {
 
 
 
-
     const CorpoTabela = () => {
 
-        // const CustomComponent = forwardRef((props, ref) => {
-        //     return <tbody ref={ref}>{props.children}</tbody>;
-        //   });
+        
 
         if (listaInvestimentos.length > 0) {
             return (
-                 <tbody>
-                   {/* <ReactSortable list={listaInvestimentos} setList={setListaInvestimentos} 
-                      animation={200}
-                     delayOnTouchStart={true}
-                      delay={2}
-                      tag= {CustomComponent}> */}
-
-                    
-    
-           
+                 <tbody>         
                     {listaInvestimentos.map((item) => {
                         return (
                             <LinhaTabela
@@ -136,37 +125,45 @@ const ListaTarefas = () => {
                                 valor={item.idValorInvestido}
                                 quantidade={item.idQuantidade}
                                 data= {item.idDataAquisição}
-                                vencimento={item.idVencimento}                               
+                                vencimento={item.idVencimento}
+                                prioridade={item.idPrioridade}                               
                             />
                         );
                     })}
-                   {/* </ReactSortable> */}
                   </tbody>
             );
         }else {
             return null;
         }
     };
+    
 
     const LinhaTabela = (props) => {
 
-        const categoriaInvestimento = listaCategorias.find(item => {
+        // Lógica para encontrar a lista de categorias
+        
+        const categoriaInvestimento = listaCategorias ? listaCategorias.find(item => {
             return item.id === props.categoria;
-        });
+        }) : null;
 
-        const categoriaVencimentos = listaVencimentos.find(item => {
+        // Lógica para encontrar a lista de vencimentos
+        
+        const categoriaVencimentos = listaVencimentos ? listaVencimentos.find(item => {
             return item.id === props.vencimento;
-        });
+        }) : null;
 
+        // Lógica para mostrar o ícone de rentabilidade ao lado da descrição
+        
+        const prioridadeItem = props.prioridade === "ligado" ? prioridadeAlerta() : null
 
         return (
             <tr className="corpo-tabela">
-                <td>{props.codigo}</td>
-                <td>{categoriaInvestimento.descricao}</td>
+                <td>{props.codigo}{prioridadeItem}</td>
+                <td>{categoriaInvestimento?.descricao}</td>
                 <td>R$ {props.valor}</td>
                 <td>{props.quantidade}</td>
                 <td>{props.data}</td>
-                <td>{categoriaVencimentos.descricao}</td>
+                <td>{ categoriaVencimentos ? categoriaVencimentos.descricao : null}</td>
                 <td>
                     <img src="/images/cancel.png" alt="ícone para deletar investimento" className="remover"
                     onClick={ () => removerItem(props.id)}/>
@@ -190,11 +187,11 @@ const ListaTarefas = () => {
                 "id": listaInvestimentos.length + 1,
                 "codigo": codigoInvestimento,
                 "idCategoria": novaCategoria,
-                "idValorInvestido": parseInt(valorInvestimento),
+                "idValorInvestido": parseFloat(valorInvestimento),
                 "idQuantidade": quantidadeInvestimento,
                 "idDataAquisição": pegarData.split("-").reverse().join("/"),
                 "idVencimento": novoVencimento,
-                "idPrioridade": "ligado"
+                "idPrioridade": novaPrioridade
             }
             
             setListaInvestimentos( [...listaInvestimentos, novoInvestimento] );
@@ -218,7 +215,21 @@ const ListaTarefas = () => {
 
     const somaQuantidade = listaInvestimentos.reduce( (soma, item) => item.idValorInvestido + soma, 0);
 
-    
+    // Lógica mostrar o alerta de prioridade ou não
+
+    const prioridadeAlerta = () => {
+          return (
+          <img src="/images/reward.png" alt="Ícone para investimentos com grande chance de valorização" className="remover"/> 
+          ); };
+
+
+<ReactSortable list={listaInvestimentos} setList={setListaInvestimentos} 
+    animation={200}
+   delayOnTouchStart={true}
+    delay={2}
+    tag= "tbody">
+        <CorpoTabela />
+    </ReactSortable>
 
 
     //Começa abaixo o jSX 
@@ -227,8 +238,11 @@ const ListaTarefas = () => {
     <> {/* ReactFragment */}
         <div id="container">
             <section id="primeira-parte">
-                <form action="" onSubmit={event => event.preventDefault()}>
+                <form id="formulario" action="" onSubmit={event => event.preventDefault()}>
                     <div className="primeira-divisao">
+                        <div className="secao-titulo">
+                            <h1 id="titulo">Carteira de Investimentos</h1>
+                        </div>
                         <div className="investimento">
                             <label className="investimento-label" htmlFor="investimento">Investimento: </label>
                             <input type="text" className="investimento-input" name="investimento" placeholder="Somente código do investimento" value={codigoInvestimento}
@@ -237,13 +251,14 @@ const ListaTarefas = () => {
                         <div className="investimento">
                             <label htmlFor="categoria" className="investimento-label">Categorias: </label>
                             <select name="categoria" value={novaCategoria || ""} className="investimento-input" onChange={ (event) => setNovaCategoria(event.target.value) }>
-                                <option disabled >Selecione uma opção</option>
+                                <option defaultValue disabled value= "">Selecione uma opção</option>
                                 <OpcoesCategorias />
                             </select>
                         </div>
                         <div className="investimento">
                             <label className="investimento-label" htmlFor="investimento">Valor investido: </label>
-                            <input type="number" className="investimento-input" name="investimento"  required onChange={ (event) => setValorInvestimento(event.target.value) } />
+                            <input type="number" className="investimento-input" name="investimento" placeholder="Em reais" 
+                            required onChange={ (event) => setValorInvestimento(event.target.value) } />
                         </div>
                         <div className="investimento">
                             <label className="investimento-label" htmlFor="investimento">Quantidade: </label>
@@ -260,10 +275,10 @@ const ListaTarefas = () => {
                             </div>
                         </div>
                         <div className="alerta-prioridade">
-                            <input type="checkbox" name="prioridade" />
-                            <label htmlFor="prioridade">Prioridade</label>
+                            <input type="checkbox" name="prioridade" onChange={() => {setNovaPrioridade( novaPrioridade === "ligado" ? "desligado" : "ligado")}}/>
+                            <label htmlFor="prioridade"> Rentabilidade alta?</label>
                         </div>
-                            <button id="botao-inserir" type="submit" onClick={ (event) => inserirItem(event) }>Inserir</button>
+                            <button id="botao-inserir" type="submit" onClick= {() => document.getElementByID("formulario").reset()} onClick={ (event) => inserirItem(event) }>Inserir</button>
                     </div>
                 </form>
             </section>
@@ -280,6 +295,48 @@ const ListaTarefas = () => {
                             <th>Remover</th>
                         </tr>
                     </thead>
+                    {/* <ReactSortable list={listaInvestimentos} setList={setListaInvestimentos} 
+                      animation={200}
+                     delayOnTouchStart={true}
+                      delay={2}
+                      tag= "tbody">
+                          
+
+                            {listaInvestimentos.map((item) => {
+
+                                const categoriaInvestimento =  listaCategorias.find(i => {
+                                    return i.id === item.idCategoria;
+                                });
+
+                                
+
+                                const categoriaVencimentos =  listaVencimentos.find(i => {
+                                    return i.id === item.idVencimento;
+                                });
+
+                                
+
+                                const prioridadeItem = item.prioridade === "ligado" ? prioridadeAlerta() : null
+
+                                return (
+                                    <tr className="corpo-tabela" key={item.id}>
+                                        <td>{item.codigo}{prioridadeItem}</td>
+                                        <td>{categoriaInvestimento?.descricao}</td>
+                                        <td>R$ {item.valor}</td>
+                                        <td>{item.idQuantidade}</td>
+                                        <td>{item.idDataAquisição}</td>
+                                        <td>{ categoriaVencimentos ? categoriaVencimentos.descricao : null}</td>
+                                        <td>
+                                            <img src="/images/cancel.png" alt="ícone para deletar investimento" className="remover"
+                                            onClick={ () => removerItem(item.id)}/>
+                                        </td>
+                                    </tr>
+                                
+
+                                );
+                            })} */}
+                    
+                    {/* </ReactSortable> */}
                     <CorpoTabela />
                     <tfoot>
                         <tr>
